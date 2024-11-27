@@ -3,6 +3,12 @@ const GRID_HEIGHT = 16;
 
 const gridContainer = document.querySelector(".grid-container");
 
+function changeBackgroundColor(event) {
+    const COLOR_TO_APPLY = "red";
+    
+    event.target.style.backgroundColor = COLOR_TO_APPLY;
+}
+
 // Variables named x and y to represent the position of the grid cards on an
 // xy plane with the top left corner being (0, 0)
 for (let y = 0; y < GRID_HEIGHT; y++) {
@@ -20,3 +26,5 @@ for (let y = 0; y < GRID_HEIGHT; y++) {
 
     gridContainer.appendChild(gridRow);
 }
+
+gridContainer.addEventListener("mouseover", changeBackgroundColor);
