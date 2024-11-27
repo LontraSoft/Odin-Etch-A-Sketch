@@ -1,6 +1,7 @@
 const GRID_SIZE_BASE = 16;
 
 const gridContainer = document.querySelector(".grid-container");
+const resizeButton = document.querySelector("#resize-btn");
 
 function changeBackgroundColor(event) {
     const COLOR_TO_APPLY = "red";
@@ -27,11 +28,27 @@ function createGrid(sideLength = GRID_SIZE_BASE) {
 	gridContainer.appendChild(gridRow);
     }
 }
+
+function resizeGrid() {
+    const gridRows = document.querySelectorAll(".grid-row");
+    let newGridSize = prompt("Enter new grid width and height");
+
+    newGridSize = (newGridSize < 1) ? 1 : newGridSize;
+    newGridSize = (newGridSize > 100) ? 100 : newGridSize;
+
+    for (const gridRow of gridRows) {
+	const gridCards = gridRow.querySelectorAll(".grid-card");
+	for (const gridCard of gridCards) {
+	    gridCard.remove();
+	}
+	gridRow.remove();
     }
 
-    gridContainer.appendChild(gridRow);
+    createGrid(newGridSize);
 }
 
 createGrid(GRID_SIZE_BASE);
 
 gridContainer.addEventListener("mouseover", changeBackgroundColor);
+resizeButton.addEventListener("click", resizeGrid);
+
