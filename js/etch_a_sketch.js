@@ -1,12 +1,12 @@
 const GRID_SIZE_BASE = 16;
 const COLOR_BASE = "white";
+const COLOR_TO_APPLY = "black";
 
 const gridContainer = document.querySelector(".grid-container");
 const resizeButton = document.querySelector("#resize-btn");
 const resetButton = document.querySelector("#reset-btn");
 
 function changeBackgroundColor(event) {
-    const COLOR_TO_APPLY = "red";
     
     event.target.style.backgroundColor = COLOR_TO_APPLY;
 }
