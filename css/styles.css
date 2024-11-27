@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    padding: 10px;
+    margin: 10px 0;
 }
 
 .grid-button-container button {
@@ -17,8 +17,10 @@ body {
 }
 
 .grid-container {
-    width: 100vw;
-    height: 95vh;
+    width: 500px;
+    height: 500px;
+    margin: auto auto;
+    border: 4px gold ridge;
 }
 
 .grid-card {
