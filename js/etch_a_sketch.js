@@ -1,12 +1,21 @@
 const GRID_SIZE_BASE = 16;
+const COLOR_BASE = "white";
 
 const gridContainer = document.querySelector(".grid-container");
 const resizeButton = document.querySelector("#resize-btn");
+const resetButton = document.querySelector("#reset-btn");
 
 function changeBackgroundColor(event) {
     const COLOR_TO_APPLY = "red";
     
     event.target.style.backgroundColor = COLOR_TO_APPLY;
+}
+
+function resetGrid() {
+    const gridCards = document.querySelectorAll(".grid-card");
+    for (const gridCard of gridCards) {
+	gridCard.style.backgroundColor = COLOR_BASE;
+    }
 }
 
 function createGrid(sideLength = GRID_SIZE_BASE) {
@@ -50,5 +59,6 @@ function resizeGrid() {
 createGrid(GRID_SIZE_BASE);
 
 gridContainer.addEventListener("mouseover", changeBackgroundColor);
+resetButton.addEventListener("click", resetGrid);
 resizeButton.addEventListener("click", resizeGrid);
 
