@@ -1,20 +1,34 @@
 const GRID_SIZE_BASE = 16;
-const COLOR_BASE = "white";
-const COLOR_TO_APPLY = "black";
+const COLOR_BASE = "hsl(0, 0%, 100%)";
+const COLOR_TO_APPLY = "hsl(0, 0%, 0%)";
+const BRIGHTEST_LUMINOSITY_FOR_FULL_COLOR = 50;
+
+const cardLuminosityMap = new WeakMap();
 
 const gridContainer = document.querySelector(".grid-container");
 const resizeButton = document.querySelector("#resize-btn");
 const resetButton = document.querySelector("#reset-btn");
 
 function changeBackgroundColor(event) {
+    let newHue = Math.floor(Math.random() * 360);
+    const FULL_SATURATION = 100;
+    const STEPS_TO_BLACK = 10;
+    const LUMINOSITY_STEP_SIZE =
+	  BRIGHTEST_LUMINOSITY_FOR_FULL_COLOR / STEPS_TO_BLACK;
+    let newLuminosity =
+	cardLuminosityMap.get(event.target) - LUMINOSITY_STEP_SIZE;
     
-    event.target.style.backgroundColor = COLOR_TO_APPLY;
+    cardLuminosityMap.set(event.target, newLuminosity);
+
+    event.target.style.backgroundColor =
+	`hsl(${newHue}, ${FULL_SATURATION}%, ${newLuminosity}%)`;
 }
 
 function resetGrid() {
     const gridCards = document.querySelectorAll(".grid-card");
     for (const gridCard of gridCards) {
 	gridCard.style.backgroundColor = COLOR_BASE;
+	cardLuminosityMap.set(gridCard, BRIGHTEST_LUMINOSITY_FOR_FULL_COLOR);
     }
 }
 
@@ -31,7 +45,9 @@ function createGrid(sideLength = GRID_SIZE_BASE) {
 	    const gridCard = document.createElement("div");
 	    gridCard.classList.add("grid-card");
 	    gridCard.style.flex = "auto";
-	gridRow.appendChild(gridCard);
+	    gridCard.style.backgroundColor = COLOR_BASE;
+	    cardLuminosityMap.set(gridCard, BRIGHTEST_LUMINOSITY_FOR_FULL_COLOR);
+	    gridRow.appendChild(gridCard);
 	}
 	
 	gridContainer.appendChild(gridRow);
