@@ -46,6 +46,8 @@ function createGrid(sideLength = GRID_SIZE_BASE) {
 	    gridCard.classList.add("grid-card");
 	    gridCard.style.flex = "auto";
 	    gridCard.style.backgroundColor = COLOR_BASE;
+
+	    // Storing luminosity to allow for darkening with each mouseover
 	    cardLuminosityMap.set(gridCard, BRIGHTEST_LUMINOSITY_FOR_FULL_COLOR);
 	    gridRow.appendChild(gridCard);
 	}
